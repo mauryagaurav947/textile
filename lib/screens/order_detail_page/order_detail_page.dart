@@ -34,7 +34,7 @@ class _OrderDetailPageState extends State<OrderDetailPage> {
                 itemBuilder: (_, index) {
                   return _card();
                 },
-                itemCount: 10,
+                itemCount: 12,
               );
             },
             future: Services.getOrderDetail(widget.order.id!),
