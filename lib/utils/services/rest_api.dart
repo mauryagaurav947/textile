@@ -82,7 +82,6 @@ class Services {
     try {
       http.Response response = await _client.get(url, headers: _restApiHeaders);
       final jsonResponse = jsonDecode(response.body);
-      log(response.body);
       if (response.statusCode == HttpStatus.ok) {
         return Data.fromJson(jsonResponse)
             .copyWith(data: OrderDetailModel.fromJson(jsonResponse));
