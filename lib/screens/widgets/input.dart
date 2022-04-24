@@ -3,9 +3,15 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:textile/utils/palette.dart';
 
 class Input extends StatelessWidget {
-  const Input({Key? key, this.hintText, this.controller}) : super(key: key);
+  const Input({
+    Key? key,
+    this.hintText,
+    this.controller,
+    this.obscureText = false,
+  }) : super(key: key);
   final String? hintText;
   final TextEditingController? controller;
+  final bool obscureText;
 
   @override
   Widget build(BuildContext context) {
@@ -18,6 +24,7 @@ class Input extends StatelessWidget {
           fontSize: 13.sp,
         ),
         cursorHeight: 16.sp,
+        obscureText: obscureText,
         decoration: InputDecoration(
           fillColor: Colors.white,
           filled: true,
