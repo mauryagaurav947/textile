@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:convert';
-import 'dart:developer';
 import 'dart:io';
 import 'package:textile/constants/api_path.dart';
 import 'package:textile/models/models.dart';
@@ -144,19 +143,19 @@ class Services {
     } on SocketException catch (_) {
       return const Data(message: _noInternetConnection);
     } catch (e) {
-      print(e);
       return const Data(message: _errorMessage);
     }
   }
 
   //
-  static Future<Data> getOrderRowStatusList(Map<String, dynamic> body) async {
+  static Future<Data<List<String>>> getOrderRowStatusList() async {
     Uri url = _uri(Urls.baseUrl, Urls.getOrderRowStatusList);
     try {
       http.Response response = await _client.get(url, headers: _restApiHeaders);
       final jsonResponse = jsonDecode(response.body);
       if (response.statusCode == HttpStatus.ok) {
-        return Data.fromJson(jsonResponse);
+        return Data.fromJson(jsonResponse)
+            .copyWith(data: List<String>.from(jsonResponse["status_list"]));
       }
       return Data.fromJson(jsonResponse);
     } on SocketException catch (_) {

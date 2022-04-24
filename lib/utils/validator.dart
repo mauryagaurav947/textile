@@ -33,19 +33,16 @@ class Validator {
 
   // validate email
   static bool validateEmail(String email) {
-    email ??= '';
     return RegExp(emailPattern).hasMatch(email);
   }
 
   // validate mobile number
   static bool validateMobile(String mobile) {
-    mobile ??= '';
     return RegExp(mobilePattern).hasMatch(mobile);
   }
 
   // validate password
   static bool validatePassword(String password) {
-    password ??= '';
     return password.length >= 8 && password.length <= 15;
     /* return RegExp(passwordPattern).hasMatch(password) &&
         password.length > 8 &&
@@ -59,7 +56,6 @@ class Validator {
 
   // validate pincode
   static bool validatePinCode(String pinCode) {
-    pinCode ??= '';
     return pinCode.isNotEmpty &&
         RegExp(pinCodePattern).hasMatch(pinCode) &&
         pinCode.length == 6;
@@ -67,7 +63,6 @@ class Validator {
 
   // validate GST
   static bool validateGST(String gst) {
-    gst ??= '';
     return gst.isNotEmpty &&
         RegExp(gstPattern).hasMatch(gst) &&
         gst.length == 15;
@@ -75,7 +70,6 @@ class Validator {
 
   // validate aadhaar
   static bool validateAadhaar(String aadhaar) {
-    aadhaar ??= '';
     return aadhaar.isNotEmpty &&
         RegExp(aadhaarPattern).hasMatch(aadhaar) &&
         aadhaar.length == 12;
@@ -83,13 +77,11 @@ class Validator {
 
   // validate address
   static bool validateAddress(String address) {
-    address ??= '';
     return RegExp(addressPattern).hasMatch(address);
   }
 
   // validate amount
   static bool validateAmount(String amount) {
-    amount ??= '';
     return RegExp(amountPattern).hasMatch(amount);
   }
 }

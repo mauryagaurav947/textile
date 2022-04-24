@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:textile/config/router/router.dart';
@@ -9,6 +7,7 @@ import 'package:textile/screens/home/home.dart';
 import 'package:textile/screens/widgets/button.dart';
 import 'package:textile/screens/widgets/input.dart';
 import 'package:textile/utils/helpers/utils.dart';
+import 'package:textile/utils/mixins/post_frame_callback.dart';
 import 'package:textile/utils/services/rest_api.dart';
 
 class SignIn extends StatefulWidget {
@@ -18,7 +17,7 @@ class SignIn extends StatefulWidget {
   State<SignIn> createState() => _SignInState();
 }
 
-class _SignInState extends State<SignIn> {
+class _SignInState extends State<SignIn> with PostFrameCallBack {
   late TextEditingController _nameCtrl;
   late TextEditingController _passwordCtrl;
   bool _isInAsync = false;
@@ -124,5 +123,11 @@ class _SignInState extends State<SignIn> {
         _isInAsync = false;
       });
     }
+  }
+
+  @override
+  void postFrameCallback(Duration timeStamp) {
+    /// Caching image for further use
+    precacheImage(const AssetImage(AppAssets.loginBackground), context);
   }
 }

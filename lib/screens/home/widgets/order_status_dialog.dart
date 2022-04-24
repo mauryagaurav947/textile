@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:textile/config/router/router.dart';
 import 'package:textile/constants/app_constants.dart';
 import 'package:textile/models/models.dart';
@@ -7,15 +8,17 @@ import 'package:textile/utils/extensions/string_extension.dart';
 import 'package:textile/utils/helpers/utils.dart';
 import 'package:textile/utils/services/rest_api.dart';
 
-class ChangeStatusDialog extends StatefulWidget {
-  const ChangeStatusDialog({Key? key, required this.order}) : super(key: key);
+class ChangeOrderStatusDialog extends StatefulWidget {
+  const ChangeOrderStatusDialog({Key? key, required this.order})
+      : super(key: key);
   final OrderModel order;
 
   @override
-  State<ChangeStatusDialog> createState() => _ChangeStatusDialogState();
+  State<ChangeOrderStatusDialog> createState() =>
+      _ChangeOrderStatusDialogState();
 }
 
-class _ChangeStatusDialogState extends State<ChangeStatusDialog> {
+class _ChangeOrderStatusDialogState extends State<ChangeOrderStatusDialog> {
   final _future = Services.getOrderStatusList();
   String? _status;
 
@@ -40,19 +43,32 @@ class _ChangeStatusDialogState extends State<ChangeStatusDialog> {
           if (snapshot.data!.statusCode == 200 &&
               snapshot.data!.data != null &&
               snapshot.data!.data!.isNotEmpty) {
-            return Dropdown<String>(
-              label: "Status",
-              value: _status,
-              items: snapshot.data!.data!.map((status) {
-                return DropdownMenuItem<String>(
-                  child: Text(status.toStudlyCase()),
-                  value: status,
-                );
-              }).toList(),
-              onChanged: (value) {
-                _status = value!;
-                setState(() {});
-              },
+            return Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                Dropdown<String>(
+                  label: "Status",
+                  value: _status,
+                  items: snapshot.data!.data!.map((status) {
+                    return DropdownMenuItem<String>(
+                      child: Text(status.toStudlyCase()),
+                      value: status,
+                    );
+                  }).toList(),
+                  onChanged: (value) {
+                    _status = value!;
+                    setState(() {});
+                  },
+                ),
+                Padding(
+                  padding: EdgeInsets.only(right: 10.w),
+                  child: TextButton(
+                    onPressed: _changeStatus,
+                    child: const Text("Save"),
+                  ),
+                )
+              ],
             );
           } else {
             return const Text("Status not found");
@@ -60,12 +76,6 @@ class _ChangeStatusDialogState extends State<ChangeStatusDialog> {
         },
         future: _future,
       ),
-      actions: [
-        TextButton(
-          onPressed: _changeStatus,
-          child: const Text("Save"),
-        )
-      ],
     );
   }
 

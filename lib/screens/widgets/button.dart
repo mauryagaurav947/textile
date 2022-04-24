@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/src/size_extension.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:textile/screens/widgets/circular_progress_indicator.dart';
 import 'package:textile/utils/palette.dart';
 

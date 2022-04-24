@@ -4,7 +4,7 @@ class OrderDesignModel {
   int? designId;
   int? rowNumber;
   String? designCode;
-  List<RowsModel>? rows;
+  List<RowModel>? rows;
 
   OrderDesignModel(
       {this.id,
@@ -21,9 +21,9 @@ class OrderDesignModel {
     rowNumber = json['row_number'];
     designCode = json['design_code'];
     if (json['rows'] != null) {
-      rows = <RowsModel>[];
+      rows = <RowModel>[];
       json['rows'].forEach((v) {
-        rows!.add(RowsModel.fromJson(v));
+        rows!.add(RowModel.fromJson(v));
       });
     }
   }
@@ -42,7 +42,7 @@ class OrderDesignModel {
   }
 }
 
-class RowsModel {
+class RowModel {
   int? id;
   int? orderId;
   int? orderDesignId;
@@ -59,7 +59,7 @@ class RowsModel {
   List<ItemsModel>? items;
   String? warpColorCode;
 
-  RowsModel(
+  RowModel(
       {this.id,
       this.orderId,
       this.orderDesignId,
@@ -76,7 +76,7 @@ class RowsModel {
       this.items,
       this.warpColorCode});
 
-  RowsModel.fromJson(Map<String, dynamic> json) {
+  RowModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     orderId = json['order_id'];
     orderDesignId = json['order_design_id'];
