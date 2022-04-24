@@ -8,10 +8,12 @@ class Input extends StatelessWidget {
     this.hintText,
     this.controller,
     this.obscureText = false,
+    this.readOnly = false,
   }) : super(key: key);
   final String? hintText;
   final TextEditingController? controller;
   final bool obscureText;
+  final bool readOnly;
 
   @override
   Widget build(BuildContext context) {
@@ -25,6 +27,7 @@ class Input extends StatelessWidget {
         ),
         cursorHeight: 16.sp,
         obscureText: obscureText,
+        readOnly: readOnly,
         decoration: InputDecoration(
           fillColor: Colors.white,
           filled: true,

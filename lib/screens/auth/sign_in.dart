@@ -84,6 +84,7 @@ class _SignInState extends State<SignIn> with PostFrameCallBack {
                 Input(
                   hintText: "Password",
                   controller: _passwordCtrl,
+                  obscureText: true,
                 ),
                 Button(
                   label: "Log in",
